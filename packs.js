@@ -40,13 +40,27 @@ const twMergeClsx = {
     isDev: false,
 };
 
+// const vitestPlaywright = {
+//     id: "vitest-playwright",
+//     title: "Vitest + Playwright",
+//     install: "vitest playwright",
+//     isDev: true,
+// };
+
+// const oxlintOxfmt = {
+//     id: "oxlint-oxfmt",
+//     title: "oxlint + oxfmt",
+//     install: "oxlint oxfmt",
+//     isDev: true,
+// };
+
 const packs = [
     nextThemes,
+    twMergeClsx,
     reactHookFormZodResolvers,
     zustand,
     tanstackQuery,
     dayjs,
-    twMergeClsx,
 ];
 
 module.exports = { packs };

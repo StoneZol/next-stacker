@@ -162,8 +162,9 @@ async function removeDefaultShadcnLibFolders(projectRoot) {
 }
 
 /**
- * Move `components/ui` → `4_shared/components/shadcn`, rewrite imports in those files.
- * Does not modify `components.json` or tsconfig.
+ * Move `components/ui` → `4_shared/components/shadcn`, rewrite imports in those files,
+ * and merge `components.json` → `aliases` with {@link FSD_ALIAS} so future `shadcn add`
+ * emits correct paths. Does not modify tsconfig.
  * @param {{ projectRoot: string }} opts
  */
 async function applyShadcnAliasesAndRelocateUi({
@@ -178,6 +179,10 @@ async function applyShadcnAliasesAndRelocateUi({
             `components.json not found: ${cfgPath} (run shadcn init first)`,
         );
     }
+
+    const rawCfg = await fs.readFile(cfgPath, "utf8");
+    /** @type {Record<string, unknown>} */
+    let cfg = JSON.parse(rawCfg);
 
     const fourShared = getFourSharedRoot(projectRoot);
     const targetUi = path.join(
@@ -202,6 +207,19 @@ async function applyShadcnAliasesAndRelocateUi({
     const resolvedSource = path.resolve(sourceUi);
     const resolvedTarget = path.resolve(targetUi);
     if (resolvedSource === resolvedTarget) {
+        cfg.aliases = {
+            ...(typeof cfg.aliases === "object" &&
+            cfg.aliases !== null &&
+            !Array.isArray(cfg.aliases)
+                ? cfg.aliases
+                : {}),
+            ...FSD_ALIAS,
+        };
+        await fs.writeFile(
+            cfgPath,
+            `${JSON.stringify(cfg, null, 2)}\n`,
+            "utf8",
+        );
         await removeDefaultShadcnLibFolders(projectRoot);
         return {
             moved: false,
@@ -225,6 +243,20 @@ async function applyShadcnAliasesAndRelocateUi({
     }
 
     await rewriteShadcnImportsToFsd(resolvedTarget);
+
+    cfg.aliases = {
+        ...(typeof cfg.aliases === "object" &&
+        cfg.aliases !== null &&
+        !Array.isArray(cfg.aliases)
+            ? cfg.aliases
+            : {}),
+        ...FSD_ALIAS,
+    };
+    await fs.writeFile(
+        cfgPath,
+        `${JSON.stringify(cfg, null, 2)}\n`,
+        "utf8",
+    );
 
     await removeDefaultShadcnLibFolders(projectRoot);
 
