@@ -1,6 +1,6 @@
 {
     "name": "next-stacker",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Interactive CLI to scaffold Next.js with FSD, shadcn, and optional library packs",
     "main": "index.mjs",
     "bin": {

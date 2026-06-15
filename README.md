@@ -2,6 +2,27 @@
 
 Interactive CLI that scaffolds a **Next.js** project and layers your tooling on top: **extra npm packages**, optional **Feature-Sliced Design (FSD)** layout, **VS Code** folder-templates, **shadcn/ui**, and post-setup steps (tw-merge helpers, moving shadcn UI into `4_shared`, import rewrites).
 
+## Run with `npx`
+
+You can run it without cloning:
+
+```bas
+npx next-stacker
+```
+
+(Exact `npx` syntax for Git may vary by npm version; cloning and `npm install && npm start` is always reliable.)
+
+**Local development** (this repo):
+
+```bash
+npm install
+npm start
+# or, after npm link / global install:
+next-stacker
+```
+
+The CLI entry is declared in **`package.json` → `bin`** and points to **`index.mjs`** (with a Node shebang). Run the command from the directory where the new project folder should be created (the CLI creates `<folder-name>/` under the current working directory).
+
 ## What it does
 
 1. Runs the official **`create-next-app@latest`** (always current upstream behavior).
@@ -41,11 +62,13 @@ Optional packs you can toggle in the CLI (each runs as one `npm install` batch; 
 | Title | Pack id | Packages installed |
 |--------|---------|-------------------|
 | next-themes | `next-themes` | `next-themes` |
+| next-intl | `next-intl` | `next-intl` |
 | React Hook Form + Zod + resolvers | `react-hook-form-zod-resolvers` | `react-hook-form`, `zod`, `@hookform/resolvers` |
 | Zustand | `zustand` | `zustand` |
 | TanStack Query | `tanstack-query` | `@tanstack/react-query` |
 | Day.js | `dayjs` | `dayjs` |
 | tailwind-merge + clsx + CVA | `twMergeClsxCva` | `clsx`, `tailwind-merge`, `class-variance-authority` |
+| schema-dts | `schema-dts` | `schema-dts` |
 
 All current packs are **production** dependencies (`isDev: false`). Edit `packs.js` to add or change presets.
 
@@ -53,27 +76,6 @@ All current packs are **production** dependencies (`isDev: false`). Edit `packs.
 
 - **GitHub:** [github.com/StoneZol/next-stacker](https://github.com/StoneZol/next-stacker)  
   Update `repository` / `homepage` in `package.json` if your fork lives elsewhere.
-
-## Run with `npx`
-
-You can run it without cloning:
-
-```bas
-npx next-stacker
-```
-
-(Exact `npx` syntax for Git may vary by npm version; cloning and `npm install && npm start` is always reliable.)
-
-**Local development** (this repo):
-
-```bash
-npm install
-npm start
-# or, after npm link / global install:
-next-stacker
-```
-
-The CLI entry is declared in **`package.json` → `bin`** and points to **`index.mjs`** (with a Node shebang). Run the command from the directory where the new project folder should be created (the CLI creates `<folder-name>/` under the current working directory).
 
 ## Stack
 

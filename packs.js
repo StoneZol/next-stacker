@@ -40,6 +40,20 @@ const twMergeClsx = {
     isDev: false,
 };
 
+const schemaDTS = {
+    id: "schema-dts",
+    title: "schema-dts",
+    install: "schema-dts",
+    isDev: true,
+};
+
+const nextIntl = {
+    id: "next-intl",
+    title: "next-intl",
+    install: "next-intl",
+    isDev: false,
+};
+
 // const vitestPlaywright = {
 //     id: "vitest-playwright",
 //     title: "Vitest + Playwright",
@@ -56,11 +70,13 @@ const twMergeClsx = {
 
 const packs = [
     nextThemes,
-    twMergeClsx,
+    nextIntl,
     reactHookFormZodResolvers,
     zustand,
     tanstackQuery,
     dayjs,
+    schemaDTS,
+    twMergeClsx,
 ];
 
 module.exports = { packs };
