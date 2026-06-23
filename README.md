@@ -29,27 +29,28 @@ The CLI entry is declared in **`package.json` → `bin`** and points to **`index
 2. Lets you pick **optional libraries** from a curated list (`packs.js`) and runs **`npm install`** in batches (prod vs dev).
 3. Optionally copies an **FSD template** from `teamplates/fsd` into the new project root.
 4. Optionally create in **VS Code** workspace settings from `teamplates/vscodeComponentsTeampalate` into the new project (merges with `overwrite: true`).
-That file configures the **[Fast Folder Structure](https://marketplace.visualstudio.com/items?itemName=Huuums.vscode-fast-folder-structure)** extension (`folderTemplates.*`). In VS Code, the **“Component Template”** preset creates a folder with this layout (`<FTName>` = name you enter, e.g. `Button`):
+   That file configures the **[Fast Folder Structure](https://marketplace.visualstudio.com/items?itemName=Huuums.vscode-fast-folder-structure)** extension (`folderTemplates.*`). In VS Code, the **“Component Template”** preset creates a folder with this layout (`<FTName>` = name you enter, e.g. `Button`):
 
-   ```text
-   <FTName>/
-   ├── index.ts
-   ├── <FTName>.tsx
-   ├── <FTName>.hooks.ts
-   └── <FTName>.types.ts
-   ```
+    ```text
+    <FTName>/
+    ├── index.ts
+    ├── <FTName>.tsx
+    ├── <FTName>.hooks.ts
+    └── <FTName>.types.ts
+    ```
 
-   Example for `Button`:
+    Example for `Button`:
 
-   ```text
-   Button/
-   ├── index.ts
-   ├── Button.tsx
-   ├── Button.hooks.ts
-   └── Button.types.ts
-   ```
+    ```text
+    Button/
+    ├── index.ts
+    ├── Button.tsx
+    ├── Button.hooks.ts
+    └── Button.types.ts
+    ```
 
-   Templates for each file live in `settings.json` under `folderTemplates.fileTemplates`; edit them there or add more `folderTemplates.structures` entries if you need other scaffolds.
+    Templates for each file live in `settings.json` under `folderTemplates.fileTemplates`; edit them there or add more `folderTemplates.structures` entries if you need other scaffolds.
+
 5. Optionally runs **`npx shadcn@latest init`** in the project.
 6. If FSD was applied and shadcn ran, runs **post-integration**: copies `teamplates/ifTwMergeClsxCva` into `4_shared/lib/utils`, relocates `components/ui` → `4_shared/components/shadcn`, rewrites default shadcn import paths, removes legacy `components/` and default `lib/` folders.
 
@@ -59,18 +60,17 @@ Session choices are tracked in **`lib/stackerState.mjs`** for extension and debu
 
 Optional packs you can toggle in the CLI (each runs as one `npm install` batch; dev vs prod follows `isDev`):
 
-| Title | Pack id | Packages installed |
-|--------|---------|-------------------|
-| next-themes | `next-themes` | `next-themes` |
-| next-intl | `next-intl` | `next-intl` |
-| React Hook Form + Zod + resolvers | `react-hook-form-zod-resolvers` | `react-hook-form`, `zod`, `@hookform/resolvers` |
-| Zustand | `zustand` | `zustand` |
-| TanStack Query | `tanstack-query` | `@tanstack/react-query` |
-| Day.js | `dayjs` | `dayjs` |
-| tailwind-merge + clsx + CVA | `twMergeClsxCva` | `clsx`, `tailwind-merge`, `class-variance-authority` |
-| schema-dts | `schema-dts` | `schema-dts` |
-
-All current packs are **production** dependencies (`isDev: false`). Edit `packs.js` to add or change presets.
+| Title                             | Pack id                         | Packages installed                                   | isDev |
+| --------------------------------- | ------------------------------- | ---------------------------------------------------- | ----- |
+| next-themes                       | `next-themes`                   | `next-themes`                                        | false |
+| next-intl                         | `next-intl`                     | `next-intl`                                          | false |
+| React Hook Form + Zod + resolvers | `react-hook-form-zod-resolvers` | `react-hook-form`, `zod`, `@hookform/resolvers`      | false |
+| Zustand                           | `zustand`                       | `zustand`                                            | false |
+| TanStack Query                    | `tanstack-query`                | `@tanstack/react-query`                              | false |
+| Day.js                            | `dayjs`                         | `dayjs`                                              | false |
+| tailwind-merge + clsx + CVA       | `twMergeClsxCva`                | `clsx`, `tailwind-merge`, `class-variance-authority` | false |
+| framer-motion                     | `framer-motion`                 | `framer-motion`                                      | false |
+| schema-dts                        | `schema-dts`                    | `schema-dts`                                         | true  |
 
 ## Source repository
 
@@ -85,13 +85,13 @@ All current packs are **production** dependencies (`isDev: false`). Edit `packs.
 
 ## Project layout
 
-| Path | Role |
-|------|------|
-| `index.mjs` | CLI entry |
-| `packs.js` | Library “packs” (id, title, install line, dev flag) |
-| `pipes/` | Steps: `createNextApp`, `addLibs`, `useFSDvers`, `addShadcn`, `fsdPostIntegrate`, VS Code template |
-| `lib/` | `stackerState.mjs`, `projectDependencies.mjs`, multiselect helper |
-| `teamplates/` | FSD, tw-merge, VS Code snippets, etc. |
+| Path          | Role                                                                                               |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| `index.mjs`   | CLI entry                                                                                          |
+| `packs.js`    | Library “packs” (id, title, install line, dev flag)                                                |
+| `pipes/`      | Steps: `createNextApp`, `addLibs`, `useFSDvers`, `addShadcn`, `fsdPostIntegrate`, VS Code template |
+| `lib/`        | `stackerState.mjs`, `projectDependencies.mjs`, multiselect helper                                  |
+| `teamplates/` | FSD, tw-merge, VS Code snippets, etc.                                                              |
 
 ## Requirements
 

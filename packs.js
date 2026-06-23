@@ -40,18 +40,25 @@ const twMergeClsx = {
     isDev: false,
 };
 
-const schemaDTS = {
-    id: "schema-dts",
-    title: "schema-dts",
-    install: "schema-dts",
-    isDev: true,
-};
-
 const nextIntl = {
     id: "next-intl",
     title: "next-intl",
     install: "next-intl",
     isDev: false,
+};
+
+const framerMotion = {
+    id: "framer-motion",
+    title: "framer-motion",
+    install: "framer-motion",
+    isDev: false,
+};
+
+const schemaDTS = {
+    id: "schema-dts",
+    title: "schema-dts",
+    install: "schema-dts",
+    isDev: true,
 };
 
 // const vitestPlaywright = {
@@ -75,8 +82,10 @@ const packs = [
     zustand,
     tanstackQuery,
     dayjs,
+    framerMotion,
     schemaDTS,
     twMergeClsx,
+    // vitestPlaywright,
 ];
 
 module.exports = { packs };
