@@ -15,13 +15,22 @@ import {
     resetStackerState,
 } from "./lib/stackerState.mjs";
 
-import createNextApp from "./pipes/createNextApp.js";
-import addLibs from "./pipes/addLibs.js";
-import applyFsdLayout from "./pipes/useFSDvers.js";
-import runShadcnInit from "./pipes/addShadcn.js";
-import runFsdPostIntegrate from "./pipes/fsdPostIntegrate.js";
-import applyVscodeComponentsTeamplate from "./pipes/addVScodeComponentsTeamplate.js";
-import { packs } from "./packs.js";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const {
+    createNextApp,
+} = require("./pipes/createNextApp.js");
+const { addLibs } = require("./pipes/addLibs.js");
+const { applyFsdLayout } = require("./pipes/useFSDvers.js");
+const { runShadcnInit } = require("./pipes/addShadcn.js");
+const {
+    runFsdPostIntegrate,
+} = require("./pipes/fsdPostIntegrate.js");
+const {
+    applyVscodeComponentsTeamplate,
+} = require("./pipes/addVScodeComponentsTeamplate.js");
+const { packs } = require("./packs.js");
 
 function canceled() {
     cancel("Canceled.");
